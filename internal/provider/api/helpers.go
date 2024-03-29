@@ -3,6 +3,8 @@ package uptimerobotapi
 import (
 	"errors"
 	"reflect"
+	"strconv"
+	"strings"
 )
 
 func mapKeys(m interface{}) []string {
@@ -27,4 +29,13 @@ func intToString(m map[string]int, value int) string {
 		}
 	}
 	return ""
+}
+
+func mapStatusCodes(arr []int, on_off string) string {
+	result := make([]string, len(arr))
+	for i, num := range arr {
+		result[i] = strconv.Itoa(num) + ":" + on_off
+	}
+
+	return strings.Join(result, "_")
 }
