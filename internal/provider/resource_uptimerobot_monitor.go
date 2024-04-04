@@ -115,6 +115,10 @@ func resourceMonitor() *schema.Resource {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
+			"custom_http_statuses": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			// TODO - mwindows
 		},
 	}

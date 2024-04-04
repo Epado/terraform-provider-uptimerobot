@@ -319,7 +319,7 @@ type MonitorUpdateRequest struct {
 	AlertContacts []MonitorRequestAlertContact
 
 	CustomHTTPHeaders  map[string]string
-	CustomHTTPStatuses MonitorRequestCustomHTTPStatuses
+	CustomHTTPStatuses string
 }
 
 func (client UptimeRobotApiClient) UpdateMonitor(req MonitorUpdateRequest) (m Monitor, err error) {
@@ -375,16 +375,8 @@ func (client UptimeRobotApiClient) UpdateMonitor(req MonitorUpdateRequest) (m Mo
 	}
 
 	// custom http statuses
-	customStatuses := []string{}
-	if len(req.CustomHTTPStatuses.UpStatuses) > 0 {
-		customStatuses = append(customStatuses, mapStatusCodes(req.CustomHTTPStatuses.UpStatuses, "1"))
-	}
-	if len(req.CustomHTTPStatuses.DownStatuses) > 0 {
-		customStatuses = append(customStatuses, mapStatusCodes(req.CustomHTTPStatuses.DownStatuses, "0"))
-	}
-
-	if len(customStatuses) > 0 {
-		data.Add("custom_http_statuses", strings.Join(customStatuses, "_"))
+	if len(req.CustomHTTPStatuses) > 0 {
+		data.Add("custom_http_statuses", req.CustomHTTPStatuses)
 	}
 
 	_, err = client.MakeCall(
