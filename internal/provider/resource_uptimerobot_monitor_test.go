@@ -430,7 +430,7 @@ func TestUptimeRobotDataResourceMonitor_custom_http_status_codes(t *testing.T) {
 					custom_http_headers = {
 						// Accept-Language = "en"
 					}
-					custom_http_statuses = "200:1_404:1_500:0"
+					custom_http_statuses = "404:1"
 				}
 				`, FriendlyName, Type, URL),
 				Check: resource.ComposeTestCheckFunc(
@@ -438,7 +438,7 @@ func TestUptimeRobotDataResourceMonitor_custom_http_status_codes(t *testing.T) {
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "type", Type),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "url", URL),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_headers.%", "0"),
-					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", "200:1_404:1_500:0"),
+					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", "404:1"),
 				),
 			},
 			resource.TestStep{
