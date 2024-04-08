@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
+	uptimerobotapi "github.com/Epado/terraform-provider-uptimerobot/internal/provider/api"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	uptimerobotapi "github.com/vexxhost/terraform-provider-uptimerobot/internal/provider/api"
 )
 
 func TestUptimeRobotDataResourceMonitor_http_monitor(t *testing.T) {
@@ -266,7 +266,7 @@ func TestUptimeRobotDataResourceMonitor_custom_alert_contact_threshold_and_recur
 				resource "uptimerobot_alert_contact" "test" {
 					friendly_name = "SRE Team"
 					type          = "e-mail"
-					value         = "sre@vexxhost.com"
+					value         = "sre@Epado.com"
 				}
 				resource "uptimerobot_monitor" "test" {
 					friendly_name = "%s"
@@ -438,7 +438,7 @@ func TestUptimeRobotDataResourceMonitor_custom_http_status_codes(t *testing.T) {
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "type", Type),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "url", URL),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_headers.%", "0"),
-					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses.%", "200:1_404:1_500:0"),
+					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", "200:1_404:1_500:0"),
 				),
 			},
 			resource.TestStep{

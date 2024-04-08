@@ -9,18 +9,18 @@ If you're using the provider this was forked from, you can run the following to 
 new provider:
 
 ```bash
-terraform state replace-provider louy/uptimerobot vexxhost/uptimerobot
+terraform state replace-provider louy/uptimerobot Epado/uptimerobot
 ```
 
 ## Getting started
 
-To install this provider, check out the installation instructions on [Terraform's registry page](https://registry.terraform.io/providers/vexxhost/uptimerobot/latest).
+To install this provider, check out the installation instructions on [Terraform's registry page](https://registry.terraform.io/providers/Epado/uptimerobot/latest).
 
 ```tf
 terraform {
   required_providers {
     uptimerobot = {
-      source = "vexxhost/uptimerobot"
+      source = "Epado/uptimerobot"
       version = "0.8.0"
     }
   }

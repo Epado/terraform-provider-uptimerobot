@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
+	uptimerobotapi "github.com/Epado/terraform-provider-uptimerobot/internal/provider/api"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	uptimerobotapi "github.com/vexxhost/terraform-provider-uptimerobot/internal/provider/api"
 )
 
 func resourceMonitor() *schema.Resource {
