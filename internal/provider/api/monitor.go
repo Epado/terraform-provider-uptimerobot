@@ -85,7 +85,8 @@ type Monitor struct {
 
 	IgnoreSSLErrors bool `json:"ignore_ssl_errors"`
 
-	CustomHTTPHeaders map[string]string
+	CustomHTTPHeaders  map[string]string
+	CustomHTTPStatuses string
 
 	AlertContacts []MonitorAlertContact
 }
@@ -278,6 +279,11 @@ func (client UptimeRobotApiClient) CreateMonitor(req MonitorCreateRequest) (m Mo
 		if err == nil {
 			data.Add("custom_http_headers", string(jsonData))
 		}
+	}
+
+	// custom http statuses
+	if len(req.CustomHTTPStatuses) > 0 {
+		data.Add("custom_http_statuses", req.CustomHTTPStatuses)
 	}
 
 	body, err := client.MakeCall(
