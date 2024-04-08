@@ -126,9 +126,10 @@ func resourceMonitor() *schema.Resource {
 
 func resourceMonitorCreate(d *schema.ResourceData, m interface{}) error {
 	req := uptimerobotapi.MonitorCreateRequest{
-		FriendlyName: d.Get("friendly_name").(string),
-		URL:          d.Get("url").(string),
-		Type:         d.Get("type").(string),
+		FriendlyName:       d.Get("friendly_name").(string),
+		URL:                d.Get("url").(string),
+		Type:               d.Get("type").(string),
+		CustomHTTPStatuses: d.Get("custom_http_statuses").(string),
 	}
 
 	switch req.Type {

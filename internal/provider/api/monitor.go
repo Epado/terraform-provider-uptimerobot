@@ -201,10 +201,6 @@ type MonitorRequestAlertContact struct {
 	Recurrence int
 }
 
-type MonitorRequestCustomHTTPStatuses struct {
-	UpStatuses   []int
-	DownStatuses []int
-}
 type MonitorCreateRequest struct {
 	FriendlyName string
 	URL          string
@@ -227,6 +223,8 @@ type MonitorCreateRequest struct {
 	AlertContacts []MonitorRequestAlertContact
 
 	CustomHTTPHeaders map[string]string
+
+	CustomHTTPStatuses string
 }
 
 func (client UptimeRobotApiClient) CreateMonitor(req MonitorCreateRequest) (m Monitor, err error) {

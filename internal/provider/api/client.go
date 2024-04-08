@@ -32,6 +32,8 @@ func (client UptimeRobotApiClient) MakeCall(
 		fmt.Sprintf("api_key=%s&format=json&%s", client.apiKey, params),
 	)
 
+	log.Printf("[DEBUG] Making request with payload: %#v", payload)
+
 	req, _ := http.NewRequest("POST", url, payload)
 
 	req.Header.Add("cache-control", "no-cache")
