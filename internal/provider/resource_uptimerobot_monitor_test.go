@@ -438,7 +438,8 @@ func TestUptimeRobotDataResourceMonitor_custom_http_status_codes(t *testing.T) {
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "type", Type),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "url", URL),
 					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_headers.%", "0"),
-					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", "404:1"),
+					//resource.TestMatchResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", regexp.MustCompile(".*404:1.*")),
+					resource.TestCheckResourceAttr("uptimerobot_monitor.test", "custom_http_statuses", "404:1_200:0_201:0_202:0_203:0_204:0_205:0_206:0_207:0_208:0_226:0_300:0_301:0_302:0_303:0_304:0_305:0_306:0_307:0_308:0_400:0_401:0_402:0_403:0_405:0_406:0_407:0_408:0_409:0_410:0_411:0_412:0_413:0_414:0_415:0_416:0_417:0_418:0_421:0_422:0_423:0_424:0_426:0_428:0_429:0_430:0_431:0_440:0_449:0_450:0_451:0_495:0_496:0_497:0_499:0_500:0_501:0_502:0_503:0_504:0_505:0_508:0_509:0_510:0_511:0_520:0_521:0_522:0_523:0_524:0_525:0_526:0_527:0_530:0_598:0_599:0"),
 				),
 			},
 			resource.TestStep{

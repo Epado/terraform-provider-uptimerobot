@@ -96,6 +96,7 @@ func (client UptimeRobotApiClient) GetMonitor(id int) (m Monitor, err error) {
 	data.Add("monitors", fmt.Sprintf("%d", id))
 	data.Add("ssl", fmt.Sprintf("%d", 1))
 	data.Add("custom_http_headers", fmt.Sprintf("%d", 1))
+	data.Add("custom_http_statuses", fmt.Sprintf("%d", 1))
 	data.Add("alert_contacts", fmt.Sprintf("%d", 1))
 
 	body, err := client.MakeCall(
@@ -180,6 +181,12 @@ func (client UptimeRobotApiClient) GetMonitor(id int) (m Monitor, err error) {
 		customHTTPHeaders[k] = v.(string)
 	}
 	m.CustomHTTPHeaders = customHTTPHeaders
+
+	statuses := monitor["custom_http_statuses"].(map[string]interface{})
+	upStatuses := mapStatusCodes(statuses["up"].([]interface{}), "1")
+	downStatuses := mapStatusCodes(statuses["down"].([]interface{}), "0")
+	statusesStringList := []string{upStatuses, downStatuses}
+	m.CustomHTTPStatuses = strings.Join(statusesStringList, "_")
 
 	if contacts := monitor["alert_contacts"].([]interface{}); contacts != nil {
 		m.AlertContacts = make([]MonitorAlertContact, len(contacts))

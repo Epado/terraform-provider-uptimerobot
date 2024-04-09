@@ -126,10 +126,9 @@ func resourceMonitor() *schema.Resource {
 
 func resourceMonitorCreate(d *schema.ResourceData, m interface{}) error {
 	req := uptimerobotapi.MonitorCreateRequest{
-		FriendlyName:       d.Get("friendly_name").(string),
-		URL:                d.Get("url").(string),
-		Type:               d.Get("type").(string),
-		CustomHTTPStatuses: d.Get("custom_http_statuses").(string),
+		FriendlyName: d.Get("friendly_name").(string),
+		URL:          d.Get("url").(string),
+		Type:         d.Get("type").(string),
 	}
 
 	switch req.Type {
@@ -160,6 +159,8 @@ func resourceMonitorCreate(d *schema.ResourceData, m interface{}) error {
 	req.IgnoreSSLErrors = d.Get("ignore_ssl_errors").(bool)
 
 	alertContacts := d.Get("alert_contact").(*schema.Set)
+
+	req.CustomHTTPStatuses = d.Get("custom_http_statuses").(string)
 
 	req.AlertContacts = make([]uptimerobotapi.MonitorRequestAlertContact, alertContacts.Len())
 	for k, v := range alertContacts.List() {
@@ -211,11 +212,10 @@ func resourceMonitorUpdate(d *schema.ResourceData, m interface{}) error {
 	}
 
 	req := uptimerobotapi.MonitorUpdateRequest{
-		ID:                 id,
-		FriendlyName:       d.Get("friendly_name").(string),
-		URL:                d.Get("url").(string),
-		Type:               d.Get("type").(string),
-		CustomHTTPStatuses: d.Get("custom_http_statuses").(string),
+		ID:           id,
+		FriendlyName: d.Get("friendly_name").(string),
+		URL:          d.Get("url").(string),
+		Type:         d.Get("type").(string),
 	}
 
 	switch req.Type {
@@ -259,6 +259,8 @@ func resourceMonitorUpdate(d *schema.ResourceData, m interface{}) error {
 	for k, v := range httpHeaderMap {
 		req.CustomHTTPHeaders[k] = v.(string)
 	}
+
+	req.CustomHTTPStatuses = d.Get("custom_http_statuses").(string)
 
 	monitor, err := m.(uptimerobotapi.UptimeRobotApiClient).UpdateMonitor(req)
 	if err != nil {

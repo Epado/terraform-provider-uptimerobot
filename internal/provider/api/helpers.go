@@ -31,10 +31,10 @@ func intToString(m map[string]int, value int) string {
 	return ""
 }
 
-func mapStatusCodes(arr []int, on_off string) string {
+func mapStatusCodes(arr []interface{}, on_off string) string {
 	result := make([]string, len(arr))
 	for i, num := range arr {
-		result[i] = strconv.Itoa(num) + ":" + on_off
+		result[i] = strconv.Itoa(int(num.(float64))) + ":" + on_off
 	}
 
 	return strings.Join(result, "_")
